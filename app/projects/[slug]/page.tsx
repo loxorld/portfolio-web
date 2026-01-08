@@ -2,6 +2,10 @@ import Link from "next/link";
 import { fetchProject } from "@/lib/api";
 import { notFound } from "next/navigation";
 
+function Pill({ children }: { children: React.ReactNode }) {
+  return <span className="pill">{children}</span>;
+}
+
 export default async function ProjectDetailPage({
   params,
 }: {
@@ -13,58 +17,98 @@ export default async function ProjectDetailPage({
     const project = await fetchProject(slug);
 
     return (
-      <main className="mx-auto max-w-3xl px-6 py-10">
-        <Link className="text-sm text-neutral-600 hover:underline" href="/projects">
+      <main className="mx-auto max-w-3xl">
+        {/* Back */}
+        <Link className="text-sm text-neutral-300 hover:text-white hover:underline" href="/projects">
           ← Volver
         </Link>
 
-        <h1 className="mt-4 text-3xl font-semibold">{project.title}</h1>
-        <p className="mt-2 text-sm text-neutral-700">{project.summary}</p>
+        {/* Header */}
+        <header className="mt-6">
+          <h1 className="text-3xl font-semibold tracking-tight text-white">
+            {project.title}
+          </h1>
+          <p className="mt-2 text-sm muted">{project.summary}</p>
 
-        <div className="mt-6 flex flex-wrap gap-2">
-          {project.stack.map((t) => (
-            <span
-              key={t}
-              className="rounded-full bg-neutral-100 px-3 py-1 text-xs text-neutral-700"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+            {project.publishedAt && (
+              <span className="text-xs subtle">
+                {project.publishedAt.slice(0, 10)}
+              </span>
+            )}
 
-        <section className="mt-8">
-          <h2 className="text-lg font-medium">Descripción</h2>
-          <p className="mt-2 whitespace-pre-wrap text-sm text-neutral-800">
+            {project.tags?.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map((t) => (
+                  <Pill key={t}>{t}</Pill>
+                ))}
+              </div>
+            )}
+          </div>
+        </header>
+
+        {/* Cover / gallery */}
+        {project.imageUrls?.length > 0 && (
+          <section className="mt-8">
+            {/* Primera imagen grande */}
+            <img
+              src={project.imageUrls[0]}
+              alt={`Imagen principal de ${project.title}`}
+              className="h-64 w-full rounded-2xl border border-neutral-800 object-cover"
+              loading="lazy"
+            />
+
+            {/* Resto en grid */}
+            {project.imageUrls.length > 1 && (
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                {project.imageUrls.slice(1).map((url) => (
+                  <img
+                    key={url}
+                    src={url}
+                    alt="Screenshot del proyecto"
+                    className="h-48 w-full rounded-xl border border-neutral-800 object-cover"
+                    loading="lazy"
+                  />
+                ))}
+              </div>
+            )}
+          </section>
+        )}
+
+        {/* Stack */}
+        <section className="mt-8 card">
+          <h2 className="text-sm font-semibold text-white">Stack</h2>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {project.stack.map((t) => (
+              <Pill key={t}>{t}</Pill>
+            ))}
+          </div>
+        </section>
+
+        {/* Description */}
+        <section className="mt-6 card">
+          <h2 className="text-sm font-semibold text-white">Descripción</h2>
+          <p className="mt-3 whitespace-pre-wrap text-sm muted">
             {project.description}
           </p>
         </section>
 
-        <div className="mt-10 flex gap-3">
+        {/* Links */}
+        <section className="mt-6 flex flex-wrap gap-3">
           {project.repoUrl && (
-            <a
-              className="rounded-lg border px-4 py-2 text-sm hover:bg-neutral-50"
-              href={project.repoUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a className="btn" href={project.repoUrl} target="_blank" rel="noreferrer">
               Repo
             </a>
           )}
           {project.demoUrl && (
-            <a
-              className="rounded-lg border px-4 py-2 text-sm hover:bg-neutral-50"
-              href={project.demoUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a className="btn btn-primary" href={project.demoUrl} target="_blank" rel="noreferrer">
               Demo
             </a>
           )}
-        </div>
+        </section>
       </main>
     );
-  } catch (e) {
-    // Si tu API devuelve 404, mostramos página 404 de Next
+  } catch {
     notFound();
   }
 }
