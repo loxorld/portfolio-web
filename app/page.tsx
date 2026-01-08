@@ -18,7 +18,7 @@ export default function HomePage() {
         <p className="subtle text-sm">Analista Programador Universitario · UNLP</p>
 
         <h1 className="mt-3 text-3xl font-semibold tracking-tight text-white">
-          Portfolio: proyectos reales, buenas prácticas y cero humo.
+          Portfolio: proyectos reales, buenas prácticas.
         </h1>
 
         <p className="mt-4 max-w-2xl text-sm muted">
@@ -57,7 +57,7 @@ export default function HomePage() {
       <section className="card">
         <h2 className="text-sm font-semibold text-white">Stack</h2>
         <p className="mt-2 text-sm muted">
-          Tecnologías que uso en proyectos reales (no stickers de notebook).
+          Tecnologías que uso en proyectos reales.
         </p>
 
         <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">

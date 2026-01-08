@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               />
               <div className="leading-tight">
                 <div className="text-sm font-semibold tracking-tight text-neutral-100">
-                  Brian
+                  Brian La Delfa Analista Programador Universitario
                 </div>
                 <div className="text-xs text-neutral-400">
                   Java · Spring Boot · Next.js
@@ -68,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <footer className="container pb-10">
           <div className="border-t border-neutral-800 pt-6 text-xs text-neutral-400">
-            © {new Date().getFullYear()} Brian · Next.js + Spring Boot
+            © {new Date().getFullYear()} Brian La Delfa · Next.js + Spring Boot
           </div>
         </footer>
       </body>
