@@ -36,11 +36,30 @@ export type ProjectDetail = {
   repoUrl: string | null;
 };
 
-async function getJson<T>(url: string): Promise<T> {
-  const res = await fetch(url, { cache: "no-store" });
-  if (!res.ok) {
-    throw new Error(`Request failed: ${res.status}`);
+export class ApiError extends Error {
+  status?: number;
+
+  constructor(message: string, status?: number) {
+    super(message);
+    this.name = "ApiError";
+    this.status = status;
   }
+}
+
+async function getJson<T>(url: string): Promise<T> {
+  let res: Response;
+
+  try {
+    res = await fetch(url, { cache: "no-store" });
+  } catch {
+    // Ej: backend caído, DNS, timeout, etc.
+    throw new ApiError("Network error", undefined);
+  }
+
+  if (!res.ok) {
+    throw new ApiError(`Request failed`, res.status);
+  }
+
   return (await res.json()) as T;
 }
 
