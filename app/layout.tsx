@@ -42,6 +42,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <span className="rounded-lg px-3 py-2 hover:bg-neutral-900">
                 <NavLink href="/projects">Projects</NavLink>
               </span>
+              
+              <span className="rounded-lg px-3 py-2 hover:bg-neutral-900">
+                <NavLink href="/about">About</NavLink>
+              </span>
+
+              <span className="rounded-lg px-3 py-2 hover:bg-neutral-900">
+                <NavLink href="/contact">Contact</NavLink>
+              </span>
 
               <a
                 className="rounded-lg px-3 py-2 text-neutral-200 hover:bg-neutral-900 hover:text-white"
