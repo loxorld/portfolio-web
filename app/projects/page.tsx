@@ -10,7 +10,7 @@ export default async function ProjectsPage() {
 
   return (
     <main className="mx-auto max-w-3xl">
-      <h1 className="text-3xl font-semibold tracking-tight text-white">
+      <h1 className="hero-title text-3xl font-semibold tracking-tight">
         Projects
       </h1>
       <p className="mt-2 text-sm subtle">

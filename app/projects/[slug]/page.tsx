@@ -9,9 +9,9 @@ function Pill({ children }: { children: React.ReactNode }) {
 export default async function ProjectDetailPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  const { slug } = await params;
+  const { slug } = params;
 
   try {
     const project = await fetchProject(slug);
@@ -25,7 +25,7 @@ export default async function ProjectDetailPage({
 
         {/* Header */}
         <header className="mt-6">
-          <h1 className="text-3xl font-semibold tracking-tight text-white">
+          <h1 className="hero-title text-3xl font-semibold tracking-tight">
             {project.title}
           </h1>
           <p className="mt-2 text-sm muted">{project.summary}</p>

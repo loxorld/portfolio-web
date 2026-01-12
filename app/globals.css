@@ -12,12 +12,36 @@
 }
 
 @layer components {
+  .page-bg {
+    @apply pointer-events-none fixed inset-0 -z-10;
+  }
+
+  .page-bg::before {
+    content: "";
+    @apply absolute inset-0 opacity-70;
+    background:
+      radial-gradient(900px circle at 10% 10%, rgba(255, 255, 255, 0.10), transparent 55%),
+      radial-gradient(700px circle at 90% 20%, rgba(59, 130, 246, 0.20), transparent 55%),
+      radial-gradient(600px circle at 30% 80%, rgba(14, 165, 233, 0.15), transparent 60%);
+  }
+
+  .page-bg::after {
+    content: "";
+    @apply absolute inset-0 opacity-20;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(circle at 50% 0%, black 20%, transparent 65%);
+  }
+
+
   .container {
     @apply mx-auto max-w-5xl px-6;
   }
 
   .card {
-    @apply rounded-2xl border border-neutral-800 bg-neutral-900/50 p-6;
+    @apply rounded-2xl border border-neutral-800/80 bg-neutral-900/50 p-6 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.65)] backdrop-blur;
   }
 
   .muted {
@@ -29,15 +53,15 @@
   }
 
   .pill {
-    @apply rounded-full border border-neutral-700 bg-neutral-900 px-3 py-1 text-xs text-neutral-200;
+    @apply rounded-full border border-neutral-700/80 bg-neutral-900/60 px-3 py-1 text-xs text-neutral-200;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center rounded-lg border border-neutral-700 px-4 py-2 text-sm text-neutral-100 hover:bg-neutral-900;
+    @apply inline-flex items-center justify-center rounded-lg border border-neutral-700 px-4 py-2 text-sm text-neutral-100 transition hover:-translate-y-0.5 hover:border-neutral-500 hover:bg-neutral-900/80 hover:shadow-[0_12px_30px_-18px_rgba(255,255,255,0.45)];
   }
 
   .btn-primary {
-    @apply border-transparent bg-neutral-100 text-neutral-950 hover:bg-neutral-200;
+    @apply border-transparent bg-gradient-to-r from-neutral-100 to-neutral-200 text-neutral-950 shadow-[0_14px_40px_-22px_rgba(255,255,255,0.8)] hover:from-white hover:to-neutral-200;
   }
 
     .hero-glow {
@@ -54,11 +78,20 @@
   }
 
   .card-hover {
-    @apply transition duration-200 hover:-translate-y-0.5 hover:border-neutral-700;
+    @apply transition duration-200 hover:-translate-y-0.5 hover:border-neutral-600 hover:shadow-[0_20px_50px_-32px_rgba(255,255,255,0.3)];
   }
 
   .tech-tile {
     @apply flex items-center gap-3 rounded-xl border border-neutral-800 bg-neutral-950/40 px-4 py-3 transition hover:border-neutral-700 hover:bg-neutral-900/40;
   }
+
+  .nav-item {
+    @apply rounded-lg px-3 py-2 transition hover:bg-neutral-900/80;
+  }
+
+  .hero-title {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-400;
+  }
+
 
 }

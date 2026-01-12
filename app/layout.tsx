@@ -13,6 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es">
       <body>
+        <div className="page-bg" aria-hidden="true" />
         <header className="border-b border-neutral-800 bg-neutral-950/60 backdrop-blur">
           <div className="container flex items-center justify-between py-5">
             <Link href="/" className="flex items-center gap-3">
@@ -26,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               />
               <div className="leading-tight">
                 <div className="text-sm font-semibold tracking-tight text-neutral-100">
-                  Brian La Delfa Analista Programador Universitario
+                  Brian La Delfa 
                 </div>
                 <div className="text-xs text-neutral-400">
                   Java · Spring Boot · Next.js
@@ -35,24 +36,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Link>
 
             <nav className="flex items-center gap-2 text-sm">
-              <span className="rounded-lg px-3 py-2 hover:bg-neutral-900">
+              <span className="nav-item">
                 <NavLink href="/">Home</NavLink>
               </span>
 
-              <span className="rounded-lg px-3 py-2 hover:bg-neutral-900">
+              <span className="nav-item">
                 <NavLink href="/projects">Projects</NavLink>
               </span>
               
-              <span className="rounded-lg px-3 py-2 hover:bg-neutral-900">
+              <span className="nav-item">
                 <NavLink href="/about">About</NavLink>
               </span>
 
-              <span className="rounded-lg px-3 py-2 hover:bg-neutral-900">
+              <span className="nav-item">
                 <NavLink href="/contact">Contact</NavLink>
               </span>
 
               <a
-                className="rounded-lg px-3 py-2 text-neutral-200 hover:bg-neutral-900 hover:text-white"
+                className="nav-item text-neutral-200 hover:text-white"
                 href="https://github.com/loxorld"
                 target="_blank"
                 rel="noreferrer"
@@ -61,7 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </a>
 
               <a
-                className="rounded-lg px-3 py-2 text-neutral-200 hover:bg-neutral-900 hover:text-white"
+                className="nav-item text-neutral-200 hover:text-white"
                 href="https://www.linkedin.com/in/brian-la-delfa-349a8a230/"
                 target="_blank"
                 rel="noreferrer"

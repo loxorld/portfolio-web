@@ -20,7 +20,7 @@ export default function ContactPage() {
       <section className="card hero-glow p-8">
         <p className="subtle text-sm">Contacto</p>
 
-        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-white">
+        <h1 className="hero-title mt-3 text-3xl font-semibold tracking-tight">
           Hablemos
         </h1>
 

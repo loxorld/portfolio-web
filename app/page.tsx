@@ -26,7 +26,7 @@ export default function HomePage() {
           Analista Programador Universitario · UNLP
         </p>
 
-        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-white">
+        <h1 className="hero-title mt-3 text-3xl font-semibold tracking-tight">
           Brian La Delfa — portfolio profesional
         </h1>
 
