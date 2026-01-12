@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <div className="page-bg" aria-hidden="true" />
         <header className="border-b border-neutral-800 bg-neutral-950/60 backdrop-blur">
-          <div className="container flex items-center justify-between py-5">
+          <div className="container flex flex-wrap items-center justify-between gap-4 py-5">
             <Link href="/" className="flex items-center gap-3">
               <Image
                 src="/avatar.jpg"
@@ -36,39 +36,61 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Link>
 
             <nav className="flex items-center gap-2 text-sm">
-              <span className="nav-item">
-                <NavLink href="/">Home</NavLink>
-              </span>
+              <div className="hidden items-center gap-2 md:flex">
+                <span className="nav-item">
+                  <NavLink href="/">Home</NavLink>
+                </span>
 
               <span className="nav-item">
-                <NavLink href="/projects">Projects</NavLink>
-              </span>
+                  <NavLink href="/projects">Projects</NavLink>
+                </span>
               
-              <span className="nav-item">
-                <NavLink href="/about">About</NavLink>
-              </span>
+                <span className="nav-item">
+                  <NavLink href="/about">About</NavLink>
+                </span>
 
               <span className="nav-item">
-                <NavLink href="/contact">Contact</NavLink>
-              </span>
+                  <NavLink href="/contact">Contact</NavLink>
+                </span>
 
               <a
-                className="nav-item text-neutral-200 hover:text-white"
-                href="https://github.com/loxorld"
-                target="_blank"
-                rel="noreferrer"
-              >
-                GitHub
-              </a>
+                  className="nav-item text-neutral-200 hover:text-white"
+                  href="https://github.com/loxorld"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  GitHub
+                </a>
 
               <a
-                className="nav-item text-neutral-200 hover:text-white"
-                href="https://www.linkedin.com/in/brian-la-delfa-349a8a230/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                LinkedIn
-              </a>
+                  className="nav-item text-neutral-200 hover:text-white"
+                  href="https://www.linkedin.com/in/brian-la-delfa-349a8a230/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  LinkedIn
+                </a>
+              </div>
+
+              <details className="relative md:hidden">
+                <summary className="nav-item cursor-pointer">Menu</summary>
+                <div className="nav-dropdown">
+                  <NavLink href="/">Home</NavLink>
+                  <NavLink href="/projects">Projects</NavLink>
+                  <NavLink href="/about">About</NavLink>
+                  <NavLink href="/contact">Contact</NavLink>
+                  <a href="https://github.com/loxorld" target="_blank" rel="noreferrer">
+                    GitHub
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/brian-la-delfa-349a8a230/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    LinkedIn
+                  </a>
+                </div>
+              </details>
             </nav>
           </div>
         </header>

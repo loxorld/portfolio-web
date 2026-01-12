@@ -64,7 +64,7 @@
     @apply border-transparent bg-gradient-to-r from-neutral-100 to-neutral-200 text-neutral-950 shadow-[0_14px_40px_-22px_rgba(255,255,255,0.8)] hover:from-white hover:to-neutral-200;
   }
 
-    .hero-glow {
+  .hero-glow {
     @apply relative overflow-hidden;
   }
 
@@ -87,6 +87,20 @@
 
   .nav-item {
     @apply rounded-lg px-3 py-2 transition hover:bg-neutral-900/80;
+  }
+
+  .nav-dropdown {
+    @apply absolute right-0 mt-2 flex w-48 flex-col gap-1 rounded-xl border border-neutral-800/80 bg-neutral-950/95 p-2 shadow-[0_18px_40px_-24px_rgba(0,0,0,0.8)] backdrop-blur;
+  }
+
+  .nav-dropdown a,
+  .nav-dropdown a:visited,
+  .nav-dropdown a:active {
+    @apply rounded-lg px-3 py-2 text-sm text-neutral-200 hover:bg-neutral-900/80 hover:text-white;
+  }
+
+  details > summary::-webkit-details-marker {
+    display: none;
   }
 
   .hero-title {
