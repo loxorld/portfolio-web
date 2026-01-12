@@ -14,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="es">
       <body>
         <div className="page-bg" aria-hidden="true" />
-        <header className="border-b border-neutral-800 bg-neutral-950/60 backdrop-blur">
+        <header className="relative z-50 border-b border-neutral-800 bg-neutral-950/60 backdrop-blur">
           <div className="container flex flex-wrap items-center justify-between gap-4 py-5">
             <Link href="/" className="flex items-center gap-3">
               <Image

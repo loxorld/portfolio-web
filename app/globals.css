@@ -90,7 +90,7 @@
   }
 
   .nav-dropdown {
-    @apply absolute right-0 mt-2 flex w-48 flex-col gap-1 rounded-xl border border-neutral-800/80 bg-neutral-950/95 p-2 shadow-[0_18px_40px_-24px_rgba(0,0,0,0.8)] backdrop-blur;
+    @apply absolute right-0 z-50 mt-2 flex w-48 flex-col gap-1 rounded-xl border border-neutral-800/80 bg-neutral-950/95 p-2 shadow-[0_18px_40px_-24px_rgba(0,0,0,0.8)] backdrop-blur;
   }
 
   .nav-dropdown a,
