@@ -12,16 +12,15 @@ function Pill({ children }: { children: React.ReactNode }) {
 export default async function ProjectDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   try {
     const project = await fetchProject(slug);
 
     return (
       <main className="mx-auto max-w-3xl">
-        {/* Back */}
         <Link
           className="text-sm text-neutral-300 hover:text-white hover:underline"
           href="/projects"
@@ -29,12 +28,10 @@ export default async function ProjectDetailPage({
           ← Volver
         </Link>
 
-        {/* Header */}
         <header className="mt-6">
           <h1 className="text-3xl font-semibold tracking-tight text-white">
             {project.title}
           </h1>
-
           <p className="mt-2 text-sm muted">{project.summary}</p>
 
           <div className="mt-4 flex flex-wrap items-center gap-2">
@@ -54,7 +51,6 @@ export default async function ProjectDetailPage({
           </div>
         </header>
 
-        {/* Cover / gallery */}
         {project.imageUrls?.length > 0 && (
           <section className="mt-8">
             <img
@@ -80,7 +76,6 @@ export default async function ProjectDetailPage({
           </section>
         )}
 
-        {/* Stack */}
         <section className="mt-8 card">
           <h2 className="text-sm font-semibold text-white">Stack</h2>
           <div className="mt-3 flex flex-wrap gap-2">
@@ -90,7 +85,6 @@ export default async function ProjectDetailPage({
           </div>
         </section>
 
-        {/* Description */}
         <section className="mt-6 card">
           <h2 className="text-sm font-semibold text-white">Descripción</h2>
           <p className="mt-3 whitespace-pre-wrap text-sm muted">
@@ -98,25 +92,14 @@ export default async function ProjectDetailPage({
           </p>
         </section>
 
-        {/* Links */}
         <section className="mt-6 flex flex-wrap gap-3">
           {project.repoUrl && (
-            <a
-              className="btn"
-              href={project.repoUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a className="btn" href={project.repoUrl} target="_blank" rel="noreferrer">
               Repo
             </a>
           )}
           {project.demoUrl && (
-            <a
-              className="btn btn-primary"
-              href={project.demoUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a className="btn btn-primary" href={project.demoUrl} target="_blank" rel="noreferrer">
               Demo
             </a>
           )}
@@ -124,13 +107,10 @@ export default async function ProjectDetailPage({
       </main>
     );
   } catch (e) {
-    // ✅ Si realmente es 404 (no existe / no publicado), muestro la 404 de Next
-    if (e instanceof ApiError && e.status === 404) {
-      notFound();
-    }
+    //  404 real -> notFound()
+    if (e instanceof ApiError && e.status === 404) notFound();
 
-    // Para cualquier otro error (network, 500, 403, etc.)
-    // no lo disfrazamos de 404: dejamos que lo maneje error.tsx de [slug]
+    //  cualquier otro error -> que lo muestre el error boundary
     throw e;
   }
 }

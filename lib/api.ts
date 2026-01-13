@@ -68,5 +68,5 @@ export function fetchProjects() {
 }
 
 export function fetchProject(slug: string) {
-  return getJson<ProjectDetail>(`${API_BASE_URL}/api/projects/${slug}`);
+  return getJson<ProjectDetail>(`${API_BASE_URL}/api/projects/${encodeURIComponent(slug)}`);
 }
