@@ -53,29 +53,39 @@ export default async function ProjectDetailPage({
 
         {project.imageUrls?.length > 0 && (
           <section className="mt-8">
-            <div className="overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/40">
+            <a
+              className="block overflow-hidden rounded-2xl border border-neutral-800"
+              href={project.imageUrls[0]}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Abrir imagen completa de ${project.title}`}
+            >
               <img
                 src={project.imageUrls[0]}
                 alt={`Imagen principal de ${project.title}`}
-                className="h-72 w-full object-contain"
+                className="h-64 w-full object-cover"
                 loading="lazy"
               />
-            </div>
+            </a>
 
             {project.imageUrls.length > 1 && (
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
                 {project.imageUrls.slice(1).map((url) => (
-                  <div
+                  <a
                     key={url}
-                    className="overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/40"
+                    className="block overflow-hidden rounded-xl border border-neutral-800"
+                    href={url}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Abrir imagen completa del proyecto"
                   >
                     <img
                       src={url}
                       alt="Screenshot del proyecto"
-                      className="h-48 w-full object-contain"
+                      className="h-48 w-full object-cover"
                       loading="lazy"
                     />
-                  </div>
+                  </a>
                 ))}
               </div>
             )}

@@ -25,14 +25,20 @@ export default async function ProjectsPage() {
           >
             {/* Imagen de portada */}
             {p.coverImageUrl && (
-              <div className="mb-4 overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/40">
+              <a
+                className="mb-4 block overflow-hidden rounded-xl border border-neutral-800"
+                href={p.coverImageUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Abrir imagen completa de ${p.title}`}
+              >
                 <img
                   src={p.coverImageUrl}
                   alt={`Cover de ${p.title}`}
-                  className="h-52 w-full object-contain"
+                  className="h-44 w-full object-cover"
                   loading="lazy"
                 />
-              </div>
+              </a>
             )}
 
             <div className="flex items-start justify-between gap-4">
