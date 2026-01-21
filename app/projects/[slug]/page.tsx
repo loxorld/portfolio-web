@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { fetchProject, ApiError } from "@/lib/api";
 import { notFound } from "next/navigation";
-import LightboxImage from "../components/LightboxImage";
+
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -54,26 +54,81 @@ export default async function ProjectDetailPage({
 
         {project.imageUrls?.length > 0 && (
           <section className="mt-8">
-            <LightboxImage
-              src={project.imageUrls[0]}
-              alt={`Imagen principal de ${project.title}`}
-              ariaLabel={`Abrir imagen completa de ${project.title}`}
-              containerClassName="overflow-hidden rounded-2xl border border-neutral-800"
-              imageClassName="h-64 w-full object-cover"
-            />
+            {(() => {
+              const lightboxId = `project-main-${project.slug ?? "cover"}`;
+              return (
+                <>
+                  <a
+                    className="block overflow-hidden rounded-2xl border border-neutral-800"
+                    href={`#${lightboxId}`}
+                    aria-label={`Abrir imagen completa de ${project.title}`}
+                  >
+                    <img
+                      src={project.imageUrls[0]}
+                      alt={`Imagen principal de ${project.title}`}
+                      className="h-64 w-full object-cover"
+                      loading="lazy"
+                    />
+                  </a>
+                  <div id={lightboxId} className="lightbox">
+                    <a
+                      href="#"
+                      className="lightbox-backdrop"
+                      aria-label={`Cerrar imagen de ${project.title}`}
+                    />
+                    <div className="lightbox-content">
+                      <a href="#" className="lightbox-close">
+                        Cerrar
+                      </a>
+                      <img
+                        src={project.imageUrls[0]}
+                        alt={`Imagen principal de ${project.title}`}
+                        className="lightbox-image"
+                      />
+                    </div>
+                  </div>
+                </>
+              );
+            })()}
 
             {project.imageUrls.length > 1 && (
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                {project.imageUrls.slice(1).map((url) => (
-                  <LightboxImage
-                    key={url}
-                    src={url}
-                    alt="Screenshot del proyecto"
-                    ariaLabel="Abrir imagen completa del proyecto"
-                    containerClassName="overflow-hidden rounded-xl border border-neutral-800"
-                    imageClassName="h-48 w-full object-cover"
-                  />
-                ))}
+                {project.imageUrls.slice(1).map((url, index) => {
+                  const lightboxId = `project-shot-${index}-${project.slug ?? "shot"}`;
+                  return (
+                    <div key={url}>
+                      <a
+                        className="block overflow-hidden rounded-xl border border-neutral-800"
+                        href={`#${lightboxId}`}
+                        aria-label="Abrir imagen completa del proyecto"
+                      >
+                        <img
+                          src={url}
+                          alt="Screenshot del proyecto"
+                          className="h-48 w-full object-cover"
+                          loading="lazy"
+                        />
+                      </a>
+                      <div id={lightboxId} className="lightbox">
+                        <a
+                          href="#"
+                          className="lightbox-backdrop"
+                          aria-label="Cerrar imagen del proyecto"
+                        />
+                        <div className="lightbox-content">
+                          <a href="#" className="lightbox-close">
+                            Cerrar
+                          </a>
+                          <img
+                            src={url}
+                            alt="Screenshot del proyecto"
+                            className="lightbox-image"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             )}
           </section>

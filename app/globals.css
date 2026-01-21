@@ -107,5 +107,30 @@
     @apply text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-400;
   }
 
+  .lightbox {
+    @apply pointer-events-none fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 opacity-0 transition;
+    @apply relative;
+  }
+
+  .lightbox:target {
+    @apply pointer-events-auto opacity-100;
+  }
+
+  .lightbox-backdrop {
+    @apply absolute inset-0;
+  }
+
+  .lightbox-content {
+    @apply relative z-10 w-full max-w-5xl;
+  }
+
+  .lightbox-close {
+    @apply absolute right-2 top-2 rounded-full bg-neutral-900/80 px-3 py-1 text-xs text-white hover:bg-neutral-800;
+  }
+
+  .lightbox-image {
+    @apply max-h-[80vh] w-full rounded-xl object-contain;
+  }
+
 
 }

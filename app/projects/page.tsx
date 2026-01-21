@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { fetchProjects } from "@/lib/api";
-import LightboxImage from "./components/LightboxImage";
+
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -25,15 +25,42 @@ export default async function ProjectsPage() {
             className="card transition hover:border-neutral-700"
           >
             {/* Imagen de portada */}
-            {p.coverImageUrl && (
-              <LightboxImage
-                src={p.coverImageUrl}
-                alt={`Cover de ${p.title}`}
-                ariaLabel={`Abrir imagen completa de ${p.title}`}
-                containerClassName="mb-4 overflow-hidden rounded-xl border border-neutral-800"
-                imageClassName="h-44 w-full object-cover"
-              />
-            )}
+            {p.coverImageUrl && (() => {
+              const lightboxId = `cover-${p.slug}`;
+              return (
+                <>
+                  <a
+                    className="mb-4 block overflow-hidden rounded-xl border border-neutral-800"
+                    href={`#${lightboxId}`}
+                    aria-label={`Abrir imagen completa de ${p.title}`}
+                  >
+                    <img
+                      src={p.coverImageUrl}
+                      alt={`Cover de ${p.title}`}
+                      className="h-44 w-full object-cover"
+                      loading="lazy"
+                    />
+                  </a>
+                  <div id={lightboxId} className="lightbox">
+                    <a
+                      href="#"
+                      className="lightbox-backdrop"
+                      aria-label={`Cerrar imagen de ${p.title}`}
+                    />
+                    <div className="lightbox-content">
+                      <a href="#" className="lightbox-close">
+                        Cerrar
+                      </a>
+                      <img
+                        src={p.coverImageUrl}
+                        alt={`Cover de ${p.title}`}
+                        className="lightbox-image"
+                      />
+                    </div>
+                  </div>
+                </>
+              );
+            })()}
 
             <div className="flex items-start justify-between gap-4">
               <div>
