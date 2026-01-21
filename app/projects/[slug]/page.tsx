@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { fetchProject, ApiError } from "@/lib/api";
 import { notFound } from "next/navigation";
+import LightboxImage from "../components/LightboxImage";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -53,39 +54,25 @@ export default async function ProjectDetailPage({
 
         {project.imageUrls?.length > 0 && (
           <section className="mt-8">
-            <a
-              className="block overflow-hidden rounded-2xl border border-neutral-800"
-              href={project.imageUrls[0]}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`Abrir imagen completa de ${project.title}`}
-            >
-              <img
-                src={project.imageUrls[0]}
-                alt={`Imagen principal de ${project.title}`}
-                className="h-64 w-full object-cover"
-                loading="lazy"
-              />
-            </a>
+            <LightboxImage
+              src={project.imageUrls[0]}
+              alt={`Imagen principal de ${project.title}`}
+              ariaLabel={`Abrir imagen completa de ${project.title}`}
+              containerClassName="overflow-hidden rounded-2xl border border-neutral-800"
+              imageClassName="h-64 w-full object-cover"
+            />
 
             {project.imageUrls.length > 1 && (
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
                 {project.imageUrls.slice(1).map((url) => (
-                  <a
+                  <LightboxImage
                     key={url}
-                    className="block overflow-hidden rounded-xl border border-neutral-800"
-                    href={url}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="Abrir imagen completa del proyecto"
-                  >
-                    <img
-                      src={url}
-                      alt="Screenshot del proyecto"
-                      className="h-48 w-full object-cover"
-                      loading="lazy"
-                    />
-                  </a>
+                    src={url}
+                    alt="Screenshot del proyecto"
+                    ariaLabel="Abrir imagen completa del proyecto"
+                    containerClassName="overflow-hidden rounded-xl border border-neutral-800"
+                    imageClassName="h-48 w-full object-cover"
+                  />
                 ))}
               </div>
             )}

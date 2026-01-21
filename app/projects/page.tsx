@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { fetchProjects } from "@/lib/api";
+import LightboxImage from "./components/LightboxImage";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -25,20 +26,13 @@ export default async function ProjectsPage() {
           >
             {/* Imagen de portada */}
             {p.coverImageUrl && (
-              <a
-                className="mb-4 block overflow-hidden rounded-xl border border-neutral-800"
-                href={p.coverImageUrl}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`Abrir imagen completa de ${p.title}`}
-              >
-                <img
-                  src={p.coverImageUrl}
-                  alt={`Cover de ${p.title}`}
-                  className="h-44 w-full object-cover"
-                  loading="lazy"
-                />
-              </a>
+              <LightboxImage
+                src={p.coverImageUrl}
+                alt={`Cover de ${p.title}`}
+                ariaLabel={`Abrir imagen completa de ${p.title}`}
+                containerClassName="mb-4 overflow-hidden rounded-xl border border-neutral-800"
+                imageClassName="h-44 w-full object-cover"
+              />
             )}
 
             <div className="flex items-start justify-between gap-4">
