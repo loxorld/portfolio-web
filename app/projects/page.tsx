@@ -25,12 +25,14 @@ export default async function ProjectsPage() {
           >
             {/* Imagen de portada */}
             {p.coverImageUrl && (
-              <img
-                src={p.coverImageUrl}
-                alt={`Cover de ${p.title}`}
-                className="mb-4 h-44 w-full rounded-xl border border-neutral-800 object-cover"
-                loading="lazy"
-              />
+              <div className="mb-4 overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/40">
+                <img
+                  src={p.coverImageUrl}
+                  alt={`Cover de ${p.title}`}
+                  className="h-52 w-full object-contain"
+                  loading="lazy"
+                />
+              </div>
             )}
 
             <div className="flex items-start justify-between gap-4">
