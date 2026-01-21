@@ -109,7 +109,6 @@
 
   .lightbox {
     @apply pointer-events-none fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 opacity-0 transition;
-    @apply relative;
   }
 
   .lightbox:target {
@@ -121,7 +120,7 @@
   }
 
   .lightbox-content {
-    @apply relative z-10 w-full max-w-5xl;
+    @apply relative z-10 w-full max-w-6xl;
   }
 
   .lightbox-close {
@@ -129,7 +128,7 @@
   }
 
   .lightbox-image {
-    @apply max-h-[80vh] w-full rounded-xl object-contain;
+    @apply max-h-[90vh] w-full rounded-xl object-contain;
   }
 
 
