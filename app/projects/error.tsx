@@ -16,30 +16,24 @@ export default function ProjectsError({
 
   return (
     <main className="mx-auto max-w-3xl">
-      <h1 className="text-3xl font-semibold tracking-tight text-white">
-        Projects
-      </h1>
-
-      <div className="mt-6 card">
-        <p className="text-sm text-neutral-200">
+      <section className="spotlight-card hero-glow space-y-5">
+        <p className="section-kicker">Proyectos</p>
+        <h1 className="section-title hero-title">
           No se pudieron cargar los proyectos.
+        </h1>
+        <p className="section-copy">
+          Puede ser un problema temporal de la API. Podes reintentar o volver al
+          inicio.
         </p>
-
-        <p className="mt-2 text-sm muted">
-          Si la API está en mantenimiento o caída, esta sección no va a poder
-          traer datos. Probá reintentar.
-        </p>
-
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3">
           <button className="btn btn-primary" onClick={() => reset()}>
             Reintentar
           </button>
-
           <Link className="btn" href="/">
             Volver al inicio
           </Link>
         </div>
-      </div>
+      </section>
     </main>
   );
 }

@@ -14,14 +14,7 @@ export function NavLink({
   const active = pathname === href || (href !== "/" && pathname.startsWith(href));
 
   return (
-    <Link
-      href={href}
-      className={
-        active
-          ? "text-white underline decoration-neutral-500 underline-offset-8"
-          : "text-neutral-200 hover:text-white"
-      }
-    >
+    <Link href={href} className={active ? "nav-link nav-link-active" : "nav-link"}>
       {children}
     </Link>
   );

@@ -52,19 +52,26 @@ async function getJson<T>(url: string): Promise<T> {
   try {
     res = await fetch(url, { cache: "no-store" });
   } catch {
-    // Ej: backend caído, DNS, timeout, etc.
-    throw new ApiError("Network error", undefined);
+    throw new ApiError("No se pudo conectar con la API.");
   }
 
   if (!res.ok) {
-    throw new ApiError(`Request failed`, res.status);
+    throw new ApiError("La API respondio con error.", res.status);
   }
 
   return (await res.json()) as T;
 }
 
-export function fetchProjects() {
-  return getJson<PageResponse<ProjectSummary>>(`${API_BASE_URL}/api/projects`);
+export function fetchProjects(options?: { tag?: string }) {
+  const params = new URLSearchParams();
+  if (options?.tag) {
+    params.set("tag", options.tag);
+  }
+
+  const query = params.toString();
+  const suffix = query ? `?${query}` : "";
+
+  return getJson<PageResponse<ProjectSummary>>(`${API_BASE_URL}/api/projects${suffix}`);
 }
 
 export function fetchProject(slug: string) {

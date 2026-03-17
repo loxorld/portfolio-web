@@ -10,31 +10,30 @@ export default function ProjectDetailError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  useEffect(() => console.error(error), [error]);
+  useEffect(() => {
+    console.error(error);
+  }, [error]);
 
   return (
     <main className="mx-auto max-w-3xl">
-      <h1 className="text-3xl font-semibold tracking-tight text-white">
-        Error cargando proyecto
-      </h1>
-
-      <div className="mt-6 card">
-        <p className="text-sm text-neutral-200">
-          No se pudo cargar el proyecto en este momento.
+      <section className="spotlight-card hero-glow space-y-5">
+        <p className="section-kicker">Proyecto</p>
+        <h1 className="section-title hero-title">
+          No se pudo cargar este proyecto.
+        </h1>
+        <p className="section-copy">
+          Puede ser un problema temporal de la API o una respuesta incompleta.
+          Podes reintentar o volver al listado.
         </p>
-        <p className="mt-2 text-sm muted">
-          Si la API está caída o lenta, esta vista falla. Probá reintentar.
-        </p>
-
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3">
           <button className="btn btn-primary" onClick={() => reset()}>
             Reintentar
           </button>
           <Link className="btn" href="/projects">
-            Volver a Projects
+            Volver a proyectos
           </Link>
         </div>
-      </div>
+      </section>
     </main>
   );
 }

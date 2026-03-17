@@ -1,44 +1,38 @@
 # Portfolio Web
 
-Frontend de mi portfolio profesional.  
-Aplicación web desarrollada con Next.js que consume una API propia para mostrar proyectos reales.
+Frontend del portfolio personal. Renderiza el sitio publico y el panel admin,
+consumiendo la API del repo `portfolio-api`.
 
-🔗 **Repositorio backend:**  
-https://github.com/loxorld/portfolio-api
+Repositorio backend: https://github.com/loxorld/portfolio-api
 
----
+## Stack
 
-## ✨ Características
-
-- Listado de proyectos dinámico
-- Página de detalle por proyecto
-- Navegación con estado activo
-- Diseño responsive
-- Consumo de API REST propia
-
----
-
-## 🧱 Stack
-
-- Next.js (App Router)
+- Next.js
 - TypeScript
 - Tailwind CSS
-- Fetch API
+- App Router
 
----
+## Que incluye
 
-## 🚀 Live Demo
+- Home, About, Contact y listado de proyectos
+- Detalle de proyecto consumido desde la API
+- Panel admin para crear, editar y borrar proyectos
+- Filtros por tags en la vista de proyectos
 
-> Próximamente (deploy en Vercel)
+## Desarrollo local
 
----
+Variables habituales:
 
-## 🛠️ Desarrollo local (opcional)
+- `NEXT_PUBLIC_API_BASE_URL`
+- `API_BASE_URL`
+- `ADMIN_TOKEN`
+- `ADMIN_USERNAME`
+- `ADMIN_PASSWORD`
+- `ADMIN_SESSION_SECRET`
 
-> Esta sección es solo para quien quiera clonar y ejecutar el proyecto localmente.  
+Inicio rapido:
 
-
-📌 Notas
-
-Este frontend consume una API REST desarrollada en Java con Spring Boot.
-Los datos mostrados (proyectos, stack, descripciones, imágenes) provienen exclusivamente del backend.
+```bash
+npm install
+npm run dev
+```
