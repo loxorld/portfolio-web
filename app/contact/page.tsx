@@ -1,23 +1,25 @@
 import Link from "next/link";
+import { profile } from "@/lib/profile";
+import { ResumeDownloadLink } from "../components/ResumeDownloadLink";
 import { SectionHeading } from "../components/SectionHeading";
 
 const channels = [
   {
     label: "LinkedIn",
     value: "Brian La Delfa",
-    href: "https://www.linkedin.com/in/brian-la-delfa-349a8a230/",
+    href: profile.linkedinHref,
     note: "Es el canal mas rapido para coordinar una charla.",
   },
   {
     label: "GitHub",
     value: "loxorld",
-    href: "https://github.com/loxorld",
+    href: profile.githubHref,
     note: "Aca estan los repos y el codigo con mas contexto tecnico.",
   },
   {
     label: "Email",
-    value: "brianlautaro@hotmail.com",
-    href: "mailto:brianlautaro@hotmail.com",
+    value: profile.email,
+    href: profile.emailHref,
     note: "Sirve para mensajes mas largos o propuestas puntuales.",
   },
 ];
@@ -42,14 +44,17 @@ export default function ContactPage() {
 
             <div className="flex flex-wrap gap-3">
               <a
-                href="https://www.linkedin.com/in/brian-la-delfa-349a8a230/"
+                href={profile.linkedinHref}
                 target="_blank"
                 rel="noreferrer"
                 className="btn btn-primary"
               >
                 LinkedIn
               </a>
-              <a href="mailto:brianlautaro@hotmail.com" className="btn">
+              <ResumeDownloadLink className="btn">
+                Descargar CV
+              </ResumeDownloadLink>
+              <a href={profile.emailHref} className="btn">
                 Email
               </a>
               <Link href="/projects" className="btn">
@@ -101,6 +106,45 @@ export default function ContactPage() {
         ))}
       </section>
 
+      <section className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+        <article className="card reveal-up space-y-5">
+          <SectionHeading
+            kicker="CV"
+            title="Tambien deje una version descargable del CV dentro del portfolio."
+            copy="Asi quien entra al sitio puede bajar el archivo directo sin tener que pedirtelo por mensaje."
+          />
+
+          <div className="flex flex-wrap gap-3">
+            <ResumeDownloadLink className="btn btn-primary">
+              Descargar CV en PDF
+            </ResumeDownloadLink>
+            <a
+              href={profile.linkedinHref}
+              target="_blank"
+              rel="noreferrer"
+              className="btn"
+            >
+              Ver LinkedIn
+            </a>
+          </div>
+        </article>
+
+        <article className="metric-card space-y-4 reveal-up delay-1">
+          <div className="section-kicker">Incluye</div>
+          <ul className="space-y-3 text-sm leading-7 text-neutral-300">
+            <li className="border-b border-white/8 pb-3 last:border-b-0 last:pb-0">
+              Perfil tecnico con foco en backend y APIs.
+            </li>
+            <li className="border-b border-white/8 pb-3 last:border-b-0 last:pb-0">
+              Stack principal, estudios y formas de contacto.
+            </li>
+            <li className="border-b border-white/8 pb-3 last:border-b-0 last:pb-0">
+              Un acceso rapido para descargarlo desde cualquier dispositivo.
+            </li>
+          </ul>
+        </article>
+      </section>
+
       <section className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
         <article className="card reveal-up space-y-4">
           <SectionHeading
@@ -120,12 +164,7 @@ export default function ContactPage() {
             <Link href="/projects" className="btn btn-primary">
               Ir a proyectos
             </Link>
-            <a
-              href="https://github.com/loxorld"
-              target="_blank"
-              rel="noreferrer"
-              className="btn"
-            >
+            <a href={profile.githubHref} target="_blank" rel="noreferrer" className="btn">
               Ver GitHub
             </a>
           </div>

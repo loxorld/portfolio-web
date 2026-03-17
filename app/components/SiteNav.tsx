@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { NavLink } from "./NavLink";
+import { ResumeDownloadLink } from "./ResumeDownloadLink";
 
 const internalLinks = [
   { href: "/", label: "Inicio" },
@@ -58,6 +59,10 @@ export function SiteNav() {
             {item.label}
           </a>
         ))}
+
+        <ResumeDownloadLink className="nav-item-shell nav-link">
+          CV
+        </ResumeDownloadLink>
       </div>
 
       <div className="relative md:hidden">
@@ -104,6 +109,10 @@ export function SiteNav() {
                   {item.label}
                 </a>
               ))}
+
+              <ResumeDownloadLink className="nav-link nav-dropdown-link" onClick={closeMenu}>
+                Descargar CV
+              </ResumeDownloadLink>
             </div>
           </>
         ) : null}

@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { fetchProjects, type ProjectSummary } from "@/lib/api";
+import { profile } from "@/lib/profile";
 import { getPreferredProjectCover } from "@/lib/project-media";
 import { ProjectPreviewCard } from "./components/ProjectPreviewCard";
 import { ProjectVisual } from "./components/ProjectVisual";
 import { RemoteImage } from "./components/RemoteImage";
+import { ResumeDownloadLink } from "./components/ResumeDownloadLink";
 import { SectionHeading } from "./components/SectionHeading";
 
 const tech = [
@@ -90,11 +92,14 @@ export default async function HomePage() {
               <Link href="/projects" className="btn btn-primary">
                 Ver proyectos
               </Link>
+              <ResumeDownloadLink className="btn">
+                Descargar CV
+              </ResumeDownloadLink>
               <Link href="/about" className="btn">
                 Sobre mi
               </Link>
               <a
-                href="https://github.com/loxorld"
+                href={profile.githubHref}
                 target="_blank"
                 rel="noreferrer"
                 className="btn"

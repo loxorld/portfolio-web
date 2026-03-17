@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ResumeDownloadLink } from "../components/ResumeDownloadLink";
 import { SectionHeading } from "../components/SectionHeading";
 
 const pillars = [
@@ -50,6 +51,9 @@ export default function AboutPage() {
               <Link href="/projects" className="btn btn-primary">
                 Ver proyectos
               </Link>
+              <ResumeDownloadLink className="btn">
+                Descargar CV
+              </ResumeDownloadLink>
               <Link href="/contact" className="btn">
                 Contacto
               </Link>
@@ -118,6 +122,9 @@ export default function AboutPage() {
           <Link href="/projects" className="btn btn-primary">
             Ir a proyectos
           </Link>
+          <ResumeDownloadLink className="btn">
+            Descargar CV
+          </ResumeDownloadLink>
           <Link href="/contact" className="btn">
             Contactarme
           </Link>
