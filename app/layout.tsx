@@ -3,7 +3,7 @@ import "./globals.css";
 import Link from "next/link";
 import Image from "next/image";
 import { IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
-import { NavLink } from "./components/NavLink";
+import { SiteNav } from "./components/SiteNav";
 
 const bodyFont = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -34,8 +34,8 @@ export default function RootLayout({
         <div className="page-bg" aria-hidden="true" />
 
         <header className="site-header">
-          <div className="container flex flex-wrap items-center justify-between gap-4 py-5">
-            <Link href="/" className="flex items-center gap-4">
+          <div className="container flex items-center justify-between gap-4 py-5">
+            <Link href="/" className="flex min-w-0 flex-1 items-center gap-3 sm:gap-4">
               <Image
                 src="/avatar.jpg"
                 alt="Foto de Brian"
@@ -45,7 +45,7 @@ export default function RootLayout({
                 priority
               />
 
-              <div className="leading-tight">
+              <div className="min-w-0 leading-tight">
                 <div className="font-display text-base font-semibold tracking-tight text-neutral-100">
                   Brian La Delfa
                 </div>
@@ -55,64 +55,7 @@ export default function RootLayout({
               </div>
             </Link>
 
-            <nav className="flex items-center gap-2 text-sm">
-              <div className="hidden items-center gap-2 md:flex">
-                <span className="nav-item-shell">
-                  <NavLink href="/">Inicio</NavLink>
-                </span>
-                <span className="nav-item-shell">
-                  <NavLink href="/projects">Proyectos</NavLink>
-                </span>
-                <span className="nav-item-shell">
-                  <NavLink href="/about">Sobre mi</NavLink>
-                </span>
-                <span className="nav-item-shell">
-                  <NavLink href="/contact">Contacto</NavLink>
-                </span>
-                <a
-                  className="nav-item-shell nav-link"
-                  href="https://github.com/loxorld"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  GitHub
-                </a>
-                <a
-                  className="nav-item-shell nav-link"
-                  href="https://www.linkedin.com/in/brian-la-delfa-349a8a230/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  LinkedIn
-                </a>
-              </div>
-
-              <details className="relative md:hidden">
-                <summary className="nav-item-shell nav-link cursor-pointer list-none">
-                  Menu
-                </summary>
-                <div className="nav-dropdown">
-                  <NavLink href="/">Inicio</NavLink>
-                  <NavLink href="/projects">Proyectos</NavLink>
-                  <NavLink href="/about">Sobre mi</NavLink>
-                  <NavLink href="/contact">Contacto</NavLink>
-                  <a
-                    href="https://github.com/loxorld"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    GitHub
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/brian-la-delfa-349a8a230/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    LinkedIn
-                  </a>
-                </div>
-              </details>
-            </nav>
+            <SiteNav />
           </div>
         </header>
 

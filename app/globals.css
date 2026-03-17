@@ -293,6 +293,10 @@
     @apply rounded-full border border-transparent px-3 py-2 transition hover:border-white/10 hover:bg-white/[0.05];
   }
 
+  .header-nav {
+    @apply relative flex shrink-0 items-center justify-end;
+  }
+
   .nav-link {
     @apply text-sm text-neutral-300 transition hover:text-white;
   }
@@ -301,14 +305,26 @@
     @apply text-white;
   }
 
+  .nav-toggle {
+    @apply inline-flex min-h-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-neutral-200 transition hover:border-cyan-300/30 hover:bg-white/[0.08] hover:text-white;
+  }
+
+  .nav-backdrop {
+    @apply fixed inset-0 z-40 bg-black/30;
+  }
+
   .nav-dropdown {
     @apply absolute right-0 z-50 mt-3 flex w-52 flex-col gap-1 rounded-[22px] border border-white/10 bg-[#07101f]/95 p-2 shadow-[0_24px_60px_-26px_rgba(0,0,0,0.82)] backdrop-blur-xl;
   }
 
-  .nav-dropdown a,
-  .nav-dropdown a:visited,
-  .nav-dropdown a:active {
-    @apply rounded-xl px-3 py-2 text-sm text-neutral-200 hover:bg-white/[0.06] hover:text-white;
+  .nav-dropdown-mobile {
+    width: min(18rem, calc(100vw - 3rem));
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+  }
+
+  .nav-dropdown-link {
+    @apply block rounded-xl px-3 py-2 hover:bg-white/[0.06];
   }
 
   details > summary::-webkit-details-marker {
