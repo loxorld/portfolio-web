@@ -1,3 +1,5 @@
+import type { ProjectStage } from "./project-stage";
+
 export const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8085";
 
@@ -5,6 +7,7 @@ export type ProjectSummary = {
   slug: string;
   title: string;
   summary: string;
+  stage: ProjectStage;
   publishedAt: string | null;
   tags: string[];
   stack: string[];
@@ -28,6 +31,7 @@ export type ProjectDetail = {
   title: string;
   summary: string;
   description: string;
+  stage: ProjectStage;
   publishedAt: string | null;
   tags: string[];
   stack: string[];

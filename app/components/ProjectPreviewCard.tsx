@@ -1,6 +1,10 @@
 import Link from "next/link";
 import type { ProjectSummary } from "@/lib/api";
 import { getPreferredProjectCover } from "@/lib/project-media";
+import {
+  getProjectStageBadgeClass,
+  getProjectStageLabel,
+} from "@/lib/project-stage";
 import { ProjectVisual } from "./ProjectVisual";
 
 type ProjectPreviewCardProps = {
@@ -46,13 +50,17 @@ export function ProjectPreviewCard({
       <div className="flex items-start justify-between gap-4">
         <div className="space-y-4">
           <div className="space-y-3">
-            <div className="flex items-center justify-between gap-4">
-              <span className="section-kicker text-cyan-100/70">
-                {formatDate(project.publishedAt)}
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <span className={getProjectStageBadgeClass(project.stage)}>
+                {getProjectStageLabel(project.stage)}
               </span>
               <span className="text-xs text-neutral-500">
                 {project.stack.length} tecnologias
               </span>
+            </div>
+
+            <div className="section-kicker text-cyan-100/70">
+              {formatDate(project.publishedAt)}
             </div>
 
             <h3 className={titleClassName}>{project.title}</h3>

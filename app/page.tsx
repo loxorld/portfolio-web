@@ -2,6 +2,10 @@ import Link from "next/link";
 import { fetchProjects, type ProjectSummary } from "@/lib/api";
 import { profile } from "@/lib/profile";
 import { getPreferredProjectCover } from "@/lib/project-media";
+import {
+  getProjectStageBadgeClass,
+  getProjectStageLabel,
+} from "@/lib/project-stage";
 import { ProjectPreviewCard } from "./components/ProjectPreviewCard";
 import { ProjectVisual } from "./components/ProjectVisual";
 import { RemoteImage } from "./components/RemoteImage";
@@ -135,6 +139,9 @@ export default async function HomePage() {
                 />
 
                 <div className="space-y-3">
+                  <span className={getProjectStageBadgeClass(latestProject.stage)}>
+                    {getProjectStageLabel(latestProject.stage)}
+                  </span>
                   <h2 className="font-display text-2xl text-white">
                     {latestProject.title}
                   </h2>

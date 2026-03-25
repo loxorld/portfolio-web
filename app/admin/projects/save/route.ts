@@ -3,6 +3,7 @@ import {
   createAdminProject,
   updateAdminProject,
 } from "@/lib/admin-api";
+import { normalizeProjectStage, type ProjectStage } from "@/lib/project-stage";
 import { getAdminSession } from "@/lib/admin-session";
 import { NextResponse } from "next/server";
 
@@ -50,6 +51,19 @@ function normalizePublishedAt(formData: FormData) {
   return parsed.toISOString();
 }
 
+function normalizeStage(formData: FormData): ProjectStage {
+  const stage = getText(formData, "stage");
+  if (!stage) {
+    return "STABLE";
+  }
+
+  if (stage !== "STABLE" && stage !== "IN_DEVELOPMENT") {
+    throw new Error("El avance del proyecto no es valido.");
+  }
+
+  return normalizeProjectStage(stage);
+}
+
 function buildEditorRedirect(request: Request, mode: string, slug: string, message: string) {
   const path =
     mode === "create"
@@ -85,6 +99,7 @@ function buildPayload(formData: FormData) {
     imageUrls: getList(formData, "imageUrls"),
     repoUrl: getOptionalText(formData, "repoUrl"),
     demoUrl: getOptionalText(formData, "demoUrl"),
+    stage: normalizeStage(formData),
     publishedAt: normalizePublishedAt(formData),
   };
 }

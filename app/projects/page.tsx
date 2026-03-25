@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { fetchProjects } from "@/lib/api";
+import { normalizeProjectStage } from "@/lib/project-stage";
 import { ProjectPreviewCard } from "../components/ProjectPreviewCard";
 import { SectionHeading } from "../components/SectionHeading";
 
@@ -22,12 +23,26 @@ export default async function ProjectsPage({
   const activeTag = normalizeTag(resolvedSearchParams.tag);
   const allProjects = await fetchProjects();
   const data = activeTag ? await fetchProjects({ tag: activeTag }) : allProjects;
+  const stageCounts = data.items.reduce(
+    (counts, project) => {
+      const stage = normalizeProjectStage(project.stage);
+
+      if (stage === "IN_DEVELOPMENT") {
+        counts.inDevelopment += 1;
+      } else {
+        counts.stable += 1;
+      }
+
+      return counts;
+    },
+    { stable: 0, inDevelopment: 0 },
+  );
   const featuredTags = Array.from(
     new Set(allProjects.items.flatMap((project) => project.tags)),
   ).slice(0, 10);
   const headingCopy = activeTag
     ? `Filtrado por ${activeTag}. Se muestran solo los proyectos publicados con esa etiqueta.`
-    : "Podes filtrar por etiquetas para recorrer el portfolio por tecnologia o tipo de trabajo.";
+    : "Podes filtrar por etiquetas y ver rapido cuales ya estan estables y cuales siguen en desarrollo.";
 
   return (
     <main className="space-y-8 md:space-y-10">
@@ -81,6 +96,12 @@ export default async function ProjectsPage({
                 ? "Si cambias la etiqueta, la lista vuelve a consultarse a la API."
                 : "Ordenados por fecha y listos para recorrer desde el portfolio."}
             </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <span className="pill">{stageCounts.stable} estables</span>
+              <span className="pill">
+                {stageCounts.inDevelopment} en desarrollo
+              </span>
+            </div>
           </div>
         </div>
       </section>

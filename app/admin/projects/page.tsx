@@ -4,6 +4,10 @@ import {
   fetchAdminProjects,
 } from "@/lib/admin-api";
 import { requireAdminSession } from "@/lib/admin-session";
+import {
+  getProjectStageBadgeClass,
+  getProjectStageLabel,
+} from "@/lib/project-stage";
 import Link from "next/link";
 
 type SearchParams = Promise<{
@@ -17,7 +21,7 @@ function getFirstParam(value?: string | string[]) {
 
 function formatTimestamp(value: string | null) {
   if (!value) {
-    return "Draft";
+    return "Borrador";
   }
 
   return new Intl.DateTimeFormat("es-AR", {
@@ -34,6 +38,17 @@ function statusBadgeClass(status: AdminProjectSummary["status"]) {
       return "status-badge status-badge-archived";
     default:
       return "status-badge status-badge-draft";
+  }
+}
+
+function statusLabel(status: AdminProjectSummary["status"]) {
+  switch (status) {
+    case "PUBLISHED":
+      return "Publicado";
+    case "ARCHIVED":
+      return "Archivado";
+    default:
+      return "Borrador";
   }
 }
 
@@ -108,7 +123,10 @@ export default async function AdminProjectsPage({
                 <div className="space-y-3">
                   <div className="flex flex-wrap items-center gap-3">
                     <span className={statusBadgeClass(project.status)}>
-                      {project.status}
+                      {statusLabel(project.status)}
+                    </span>
+                    <span className={getProjectStageBadgeClass(project.stage)}>
+                      {getProjectStageLabel(project.stage)}
                     </span>
                     <span className="text-xs subtle">{project.slug}</span>
                   </div>

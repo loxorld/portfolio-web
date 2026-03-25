@@ -9,6 +9,11 @@ import {
   getPreferredProjectCover,
   getPreferredProjectGallery,
 } from "@/lib/project-media";
+import {
+  getProjectStageBadgeClass,
+  getProjectStageDescription,
+  getProjectStageLabel,
+} from "@/lib/project-stage";
 import { notFound } from "next/navigation";
 import { ProjectVisual } from "../../components/ProjectVisual";
 import { RemoteImage } from "../../components/RemoteImage";
@@ -47,6 +52,9 @@ function RelatedProjectCard({
     >
       <div className="space-y-2">
         <p className="section-kicker">{label}</p>
+        <span className={getProjectStageBadgeClass(project.stage)}>
+          {getProjectStageLabel(project.stage)}
+        </span>
         <h2 className="font-display text-2xl text-white">{project.title}</h2>
         <p className="text-sm leading-7 text-neutral-300">{project.summary}</p>
       </div>
@@ -105,6 +113,7 @@ export default async function ProjectDetailPage({
   const nextProject =
     currentIndex >= 0 ? allProjects[currentIndex + 1] : null;
   const signals = [
+    getProjectStageDescription(project.stage),
     project.repoUrl ? "Repo publico" : null,
     project.demoUrl ? "Demo disponible" : null,
     preferredGallery.length > 0 ? "Galeria cargada" : null,
@@ -122,6 +131,15 @@ export default async function ProjectDetailPage({
 
       <section className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
         <div className="spotlight-card hero-glow reveal-up space-y-6">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className={getProjectStageBadgeClass(project.stage)}>
+              {getProjectStageLabel(project.stage)}
+            </span>
+            <span className="text-sm text-neutral-300">
+              {getProjectStageDescription(project.stage)}
+            </span>
+          </div>
+
           <SectionHeading kicker="Proyecto" title={project.title} copy={project.summary} />
 
           <div className="flex flex-wrap gap-2">
@@ -154,6 +172,12 @@ export default async function ProjectDetailPage({
           </div>
 
           <div className="info-list">
+            <div className="info-row">
+              <span className="text-neutral-500">Estado del proyecto</span>
+              <span className="text-right">
+                {getProjectStageLabel(project.stage)}
+              </span>
+            </div>
             <div className="info-row">
               <span className="text-neutral-500">Publicado</span>
               <span className="text-right">{formatDate(project.publishedAt)}</span>

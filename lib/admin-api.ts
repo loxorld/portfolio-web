@@ -1,3 +1,5 @@
+import type { ProjectStage } from "./project-stage";
+
 export type PageResponse<T> = {
   items: T[];
   page: number;
@@ -15,6 +17,7 @@ export type AdminProjectSummary = {
   title: string;
   summary: string;
   status: AdminProjectStatus;
+  stage: ProjectStage;
   publishedAt: string | null;
   updatedAt: string;
 };
@@ -25,6 +28,7 @@ export type AdminProjectDetail = {
   summary: string;
   description: string;
   status: AdminProjectStatus;
+  stage: ProjectStage;
   publishedAt: string | null;
   createdAt: string;
   updatedAt: string;
@@ -45,6 +49,7 @@ export type AdminProjectPayload = {
   imageUrls: string[];
   repoUrl: string | null;
   demoUrl: string | null;
+  stage: ProjectStage;
   publishedAt: string | null;
 };
 

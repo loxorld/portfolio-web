@@ -259,6 +259,14 @@
     @apply border-emerald-400/30 bg-emerald-400/10 text-emerald-100;
   }
 
+  .status-badge-stable {
+    @apply border-emerald-400/30 bg-emerald-400/10 text-emerald-100;
+  }
+
+  .status-badge-development {
+    @apply border-cyan-400/30 bg-cyan-400/10 text-cyan-50;
+  }
+
   .status-badge-archived {
     @apply border-neutral-500/30 bg-neutral-500/10 text-neutral-200;
   }

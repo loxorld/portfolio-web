@@ -1,5 +1,10 @@
 import Link from "next/link";
 import type { AdminProjectDetail } from "@/lib/admin-api";
+import {
+  getProjectStageBadgeClass,
+  getProjectStageDescription,
+  getProjectStageLabel,
+} from "@/lib/project-stage";
 
 type ProjectEditorFormProps = {
   mode: "create" | "update";
@@ -33,6 +38,28 @@ function formatTimestamp(value: string) {
   }).format(new Date(value));
 }
 
+function getStatusLabel(status: AdminProjectDetail["status"]) {
+  switch (status) {
+    case "PUBLISHED":
+      return "Publicado";
+    case "ARCHIVED":
+      return "Archivado";
+    default:
+      return "Borrador";
+  }
+}
+
+function getStatusBadgeClass(status: AdminProjectDetail["status"]) {
+  switch (status) {
+    case "PUBLISHED":
+      return "status-badge status-badge-published";
+    case "ARCHIVED":
+      return "status-badge status-badge-archived";
+    default:
+      return "status-badge status-badge-draft";
+  }
+}
+
 export function ProjectEditorForm({
   mode,
   project,
@@ -40,6 +67,7 @@ export function ProjectEditorForm({
   success,
 }: ProjectEditorFormProps) {
   const currentStatus = project?.status === "PUBLISHED" ? "PUBLISHED" : "DRAFT";
+  const currentStage = project?.stage ?? "STABLE";
 
   return (
     <section className="card space-y-6">
@@ -50,18 +78,25 @@ export function ProjectEditorForm({
       )}
 
       {project && (
-        <div className="grid gap-3 text-xs subtle md:grid-cols-3">
+        <div className="grid gap-3 text-xs subtle md:grid-cols-2 xl:grid-cols-4">
           <div>
             <div className="field-label">Estado actual</div>
             <div className="mt-1">
               <span
-                className={`status-badge ${
-                  project.status === "PUBLISHED"
-                    ? "status-badge-published"
-                    : "status-badge-draft"
-                }`}
+                className={getStatusBadgeClass(project.status)}
               >
-                {project.status}
+                {getStatusLabel(project.status)}
+              </span>
+            </div>
+          </div>
+          <div>
+            <div className="field-label">Avance actual</div>
+            <div className="mt-1 flex flex-wrap items-center gap-3">
+              <span className={getProjectStageBadgeClass(project.stage)}>
+                {getProjectStageLabel(project.stage)}
+              </span>
+              <span className="text-sm text-neutral-300">
+                {getProjectStageDescription(project.stage)}
               </span>
             </div>
           </div>
@@ -198,6 +233,22 @@ export function ProjectEditorForm({
 
         <div className="grid gap-4 md:grid-cols-2">
           <label className="field">
+            <span className="field-label">Avance del proyecto</span>
+            <select
+              className="field-input"
+              name="stage"
+              defaultValue={currentStage}
+            >
+              <option value="STABLE">Estable</option>
+              <option value="IN_DEVELOPMENT">En desarrollo</option>
+            </select>
+            <span className="text-xs subtle">
+              Usa &quot;En desarrollo&quot; para mostrar ideas o versiones que
+              todavia siguen cambiando.
+            </span>
+          </label>
+
+          <label className="field">
             <span className="field-label">Estado</span>
             <select
               className="field-input"
@@ -218,7 +269,7 @@ export function ProjectEditorForm({
               defaultValue={toDateTimeLocal(project?.publishedAt ?? null)}
             />
             <span className="text-xs subtle">
-              Si queda vacio y el estado es Published, se usa la fecha actual.
+              Si queda vacio y el estado es Publicado, se usa la fecha actual.
             </span>
           </label>
         </div>
