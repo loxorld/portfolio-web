@@ -28,6 +28,7 @@ export function ProjectPreviewCard({
   project,
   variant = "grid",
 }: ProjectPreviewCardProps) {
+  const projectHref = `/projects/${project.slug}`;
   const preferredCover = getPreferredProjectCover(
     project.slug,
     project.coverImageUrl,
@@ -39,7 +40,13 @@ export function ProjectPreviewCard({
       : "font-display text-2xl text-white";
 
   return (
-    <article className="project-card reveal-up flex h-full flex-col gap-5">
+    <article className="project-card reveal-up flex h-full cursor-pointer flex-col gap-5">
+      <Link
+        href={projectHref}
+        aria-label={`Abrir detalles de ${project.title}`}
+        className="absolute inset-0 z-10 rounded-[28px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/60 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+      />
+
       <ProjectVisual
         title={project.title}
         slug={project.slug}
@@ -79,17 +86,27 @@ export function ProjectPreviewCard({
         </div>
       </div>
 
-      <div className="mt-auto flex flex-wrap gap-3">
-        <Link href={`/projects/${project.slug}`} className="btn btn-primary">
+      <div className="pointer-events-none relative z-20 mt-auto flex flex-wrap gap-3">
+        <span aria-hidden="true" className="btn btn-primary">
           Ver detalle
-        </Link>
+        </span>
         {project.repoUrl ? (
-          <a href={project.repoUrl} target="_blank" rel="noreferrer" className="btn">
+          <a
+            href={project.repoUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="btn pointer-events-auto"
+          >
             Repo
           </a>
         ) : null}
         {project.demoUrl ? (
-          <a href={project.demoUrl} target="_blank" rel="noreferrer" className="btn">
+          <a
+            href={project.demoUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="btn pointer-events-auto"
+          >
             Demo
           </a>
         ) : null}
